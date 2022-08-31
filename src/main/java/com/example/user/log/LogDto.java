@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class LogDto {
 
     private String userName;
+
     private String ipAddress;
 }

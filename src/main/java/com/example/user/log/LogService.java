@@ -10,8 +10,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class LogService {
-private final UserRepository userRepository;
-private final LogRepository logRepository;
+    private final UserRepository userRepository;
+    private final LogRepository logRepository;
 
 
     public List<Log> getAll() {

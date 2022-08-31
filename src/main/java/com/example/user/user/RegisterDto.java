@@ -20,5 +20,6 @@ public class RegisterDto {
     private String gd; // jinsi erkak/ayol
 
     private String natn; // millati
+
     private String userName;
 }

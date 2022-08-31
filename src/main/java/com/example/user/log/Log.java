@@ -23,7 +23,7 @@ public class Log {
     private Date sana;
 
     @Id
-    @Column(name = "user_name",unique = true)
+    @Column(name = "user_name", unique = true)
     private String userName;
 
     @Column(name = "ip_address")

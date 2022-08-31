@@ -14,9 +14,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LogController {
     private final LogService logService;
-@GetMapping
-    public List<Log> getAll(){
-    return logService.getAll();
-}
+
+    @GetMapping
+    public List<Log> getAll() {
+        return logService.getAll();
+    }
 
 }

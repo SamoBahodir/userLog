@@ -26,6 +26,7 @@ public class User {
     private String gd; // jinsi erkak/ayol
 
     private String natn; // millati
-    @Column(name = "user_name",unique = true)
+
+    @Column(name = "user_name", unique = true)
     private String userName;
 }

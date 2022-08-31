@@ -22,7 +22,6 @@ public class UserService {
         this.logRepository = logRepository;
     }
 
-
     public User createUser(RegisterDto registerDto) throws UnknownHostException {
         User user = new User();
         if (registerDto.getUserName().equals(user.getUserName()))

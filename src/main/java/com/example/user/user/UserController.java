@@ -18,7 +18,7 @@ public class UserController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> createUser( @RequestBody RegisterDto registerDto) throws UnknownHostException {
+    public ResponseEntity<?> createUser(@RequestBody RegisterDto registerDto) throws UnknownHostException {
         log.debug("Create User {}", registerDto);
         return ResponseEntity.ok(userService.createUser(registerDto));
     }
