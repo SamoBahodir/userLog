@@ -1,45 +1,43 @@
 package com.example.user.user;
 
 
-import com.example.user.log.Log;
-import com.example.user.log.LogRepository;
+import com.example.user.role.Role;
+import com.example.user.role.RoleEntityRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
 
 @Service
 public class UserService {
 
+    @Autowired
+    private UserEntityRepository userEntityRepository;
+    @Autowired
+    private RoleEntityRepository roleEntityRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    public final UserRepository userRepository;
-
-    private final LogRepository logRepository;
-
-    public UserService(UserRepository userRepository, LogRepository logRepository) {
-        this.userRepository = userRepository;
-        this.logRepository = logRepository;
+    public User saveUser(User userEntity) {
+        Role userRole = roleEntityRepository.findByName("ROLE_USER");
+        userEntity.setRole(userRole);
+        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+        return userEntityRepository.save(userEntity);
     }
 
-    public User createUser(RegisterDto registerDto) throws UnknownHostException {
-        User user = new User();
-        if (registerDto.getUserName().equals(user.getUserName()))
-            throw new RuntimeException();
-        user.setUserName(registerDto.getUserName());
-        user.setEmail(registerDto.getEmail());
-        user.setFirst_name(registerDto.getFirst_name());
-        user.setGd(registerDto.getGd());
-        user.setMid_name(registerDto.getMid_name());
-        user.setNatn(registerDto.getNatn());
-
-        Log log = new Log();
-        log.setUserName(registerDto.getUserName());
-        log.setIpAddress(InetAddress.getLocalHost().getHostAddress());
-        userRepository.save(user);
-        logRepository.save(log);
-        return user;
+    public User findByLogin(String login) {
+        return userEntityRepository.findByLogin(login);
     }
+
+    public User findByLoginAndPassword(String login, String password) {
+        User userEntity = findByLogin(login);
+        if (userEntity != null) {
+            if (passwordEncoder.matches(password, userEntity.getPassword())) {
+                return userEntity;
+            }
+        }
+        return null;
+    }
+
 
 
 }

@@ -1,10 +1,10 @@
 package com.example.user.user;
 
+import com.example.user.role.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.intellij.lang.annotations.JdkConstants;
 
 import javax.persistence.*;
 
@@ -16,17 +16,12 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String email; // Elektrin pochtasi
+    private Integer id;
+    private String login;
 
-    private String first_name; // Ismi
+    private String password;
+    @ManyToOne
+    private Role role;
 
-    private String mid_name; // familyasi
 
-    private String gd; // jinsi erkak/ayol
-
-    private String natn; // millati
-
-    @Column(name = "user_name", unique = true)
-    private String userName;
 }
